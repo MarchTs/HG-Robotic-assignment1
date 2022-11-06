@@ -1,0 +1,107 @@
+swagger: '2.0'
+info:
+    description: 'This is a description.'
+    version: '1.0.0'
+    title: 'ElitFund API Document'
+    termsOfService: ''
+    license:
+        name: 'Apache 2.0'
+        url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:3000'
+basePath: '/'
+schemes:
+    - 'http'
+
+paths:
+    /measurement/convert/distance:
+        post:
+            summary: 'Convert distace'
+            description: 'Convert distace'
+            operationId: 'Convert distace'
+            consumes:
+                - 'application/json'
+            produces:
+                - 'application/json'
+            parameters:
+                - in: 'body'
+                  name: 'body'
+                  description: 'Convert distace body'
+                  required: true
+                  schema:
+                      $ref: '#/definitions/DistanceForm'
+            responses:
+                '200':
+                    description: ''
+                    schema:
+                        $ref: '#/definitions/UnitDistanceMessage'
+    /measurement/convert/area:
+        post:
+            summary: 'Convert area'
+            description: 'Convert area'
+            operationId: 'Convert area'
+            consumes:
+                - 'application/json'
+            produces:
+                - 'application/json'
+            parameters:
+                - in: 'body'
+                  name: 'body'
+                  description: 'Convert area body'
+                  required: true
+                  schema:
+                      $ref: '#/definitions/AreaConvertForm'
+            responses:
+                '200':
+                    description: ''
+                    schema:
+                        $ref: '#/definitions/UnitAreaMessage'
+
+definitions:
+    UnitAreaMessage:
+        type: object
+        properties:
+            value:
+                type: number
+                example: 10
+            unit:
+                type: string
+                enum: ['rai', 'square-mile', 'square-meter']
+    UnitDistanceMessage:
+        type: object
+        properties:
+            value:
+                type: number
+                example: 10
+            unit:
+                type: string
+                enum: ['mile', 'meter', 'kilometer', 'centimeter']
+    DistanceConvertForm:
+        type: object
+        properties:
+            toUnit:
+                type: string
+                enum: ['mile', 'meter', 'kilometer', 'centimeter']
+            from:
+                type: object
+                properties:
+                    unit:
+                        type: string
+                        enum: ['mile', 'meter', 'kilometer', 'centimeter']
+                    value:
+                        type: number
+                        example: 10
+    AreaConvertForm:
+        type: object
+        properties:
+            toUnit:
+                type: string
+                enum: ['rai', 'square-mile', 'square-meter']
+            from:
+                type: object
+                properties:
+                    unit:
+                        type: string
+                        enum: ['rai', 'square-mile', 'square-meter']
+                    value:
+                        type: number
+                        example: 10
